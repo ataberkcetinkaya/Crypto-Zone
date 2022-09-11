@@ -5,15 +5,12 @@ const CryptoTable = () => {
 
     const inputRef = useRef(null);
     const [crypto, setCrypto] = React.useState({});
-    //const [logo, setLogo] = React.useState('');
 
     const getCrypto = async () => {
-       const { data } = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum&vs_currencies=usd&include_24hr_vol=true&include_24hr_change=true') //wait for data to reach (async and await)
+       const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250') //wait for data to reach (async and await)
        setCrypto(data);
     }
-
     console.log(crypto);
-    
     
   return (
     <>
@@ -26,6 +23,9 @@ const CryptoTable = () => {
           <table className="w-full text-sm text-center  ">
               <thead className="text-xs uppercase bg-gray-700 text-gray-100">
                   <tr>
+                      <th className="py-4 px-6">
+                          Rank
+                      </th>
                       <th className="py-4 px-6">
                           Crypto
                       </th>
@@ -42,23 +42,27 @@ const CryptoTable = () => {
               </thead>
               
               <tbody>
-                {Object.keys(crypto).map(key => {
-                return (
-                  <tr className="bg-gray-800 text-center ">
-                        <th className="py-4 px-6 font-medium whitespace-normal text-white">
-                           {key}
-                        </th>
-                    <td className="py-4 px-6 text-white">
-                        {crypto[key].usd}
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                        {crypto[key].usd_24h_change}
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                        {crypto[key].usd_24h_vol}
-                    </td>
-                  </tr>
-                  )})}
+                {Object.keys(crypto).map((key, index) => {
+                    return (
+                        <tr className="bg-gray-800 text-center ">
+                            <th className="py-4 px-6 font-medium whitespace-normal text-white">
+                                {1 + index}
+                            </th>
+                            <td className="py-4 px-6 text-white">
+                                {crypto[key].name}
+                            </td>
+                            <td className="py-4 px-6 text-white">
+                                {crypto[key].current_price}
+                            </td>
+                            <td className="py-4 px-6 text-white">
+                                {crypto[key].price_change_24h}
+                            </td>
+                            <td className="py-4 px-6 text-white">
+                                {crypto[key].total_volume}
+                            </td>
+                        </tr>
+                         )
+                        })}
               </tbody>
           </table>
         </div>
