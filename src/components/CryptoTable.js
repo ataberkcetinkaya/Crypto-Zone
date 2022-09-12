@@ -1,6 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+ 
 const CryptoTable = () => {
 
     const inputRef = useRef(null);
@@ -11,17 +14,32 @@ const CryptoTable = () => {
        setCrypto(data);
     }
     console.log(crypto);
+
+    useEffect(() => {
+        getCrypto();
+    }, []);
+
+    const handleType = () => {
+        console.log(inputRef.current.value);
+    }
+
+    const addStar = () => {
+        
+    }
     
   return (
     <>
-      <div className="flex justify-center mt-5  h-10">
-      <input ref={inputRef} type="text" className='bg-black text-white w-64 h-10 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
-        <button onClick={() => getCrypto()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Get Crypto</button>
+      <div className="flex justify-center mt-5 h-10">
+        <input ref={inputRef} type="text" className='bg-black text-white w-64 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
+        <button onClick={handleType} className='ml-5 w-24 border-solid bg-black text-white border-2 border-slate-400'>Search</button>
+        <Link to="/stars">
+            <FontAwesomeIcon icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
+        </Link>
       </div>
 
-      <div className="ml-24 mr-24 flex justify-center mt-12">
-          <table className="w-full text-sm text-center  ">
-              <thead className="text-xs uppercase bg-gray-700 text-gray-100">
+      <div className="flex justify-center mt-10 ml-96 mr-96">
+          <table className="w-full text-sm text-center">
+              <thead className="text-xs uppercase bg-gray-700 text-gray-100 ">
                   <tr>
                       <th className="py-4 px-6">
                           Rank
@@ -45,8 +63,9 @@ const CryptoTable = () => {
                 {Object.keys(crypto).map((key, index) => {
                     return (
                         <tr className="bg-gray-800 text-center ">
-                            <th className="py-4 px-6 font-medium whitespace-normal text-white">
+                            <th className="py-4 px-6 font-medium text-white">
                                 {1 + index}
+                                <button className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
                             </th>
                             <td className="py-4 px-6 text-white">
                                 {crypto[key].name}
