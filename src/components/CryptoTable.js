@@ -3,35 +3,21 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { useData } from '../context/DataContext';
  
 const CryptoTable = () => {
 
-    const inputRef = useRef(null);
-    const [crypto, setCrypto] = React.useState({});
+    const { inputRef, crypto, addStar } = useData();
 
-    const getCrypto = async () => {
-       const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250') //wait for data to reach (async and await)
-       setCrypto(data);
-    }
-    console.log(crypto);
-
-    useEffect(() => {
-        getCrypto();
-    }, []);
-
-    const handleType = () => {
-        console.log(inputRef.current.value);
-    }
-
-    const addStar = () => {
-        
-    }
+    // const handleType = () => {
+    //     console.log(inputRef.current.value);
+    // } onClick={handleType} > to input button
     
   return (
     <>
       <div className="flex justify-center mt-5 h-10">
         <input ref={inputRef} type="text" className='bg-black text-white w-64 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
-        <button onClick={handleType} className='ml-5 w-24 border-solid bg-black text-white border-2 border-slate-400'>Search</button>
+        <button className='ml-5 w-24 border-solid bg-black text-white border-2 border-slate-400'>Search</button>
         <Link to="/stars">
             <FontAwesomeIcon icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
         </Link>
@@ -64,8 +50,8 @@ const CryptoTable = () => {
                     return (
                         <tr className="bg-gray-800 text-center ">
                             <th className="py-4 px-6 font-medium text-white">
-                                {1 + index}
-                                <button className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
+                                <span>{crypto[key].market_cap_rank}</span>
+                                <button onClick={() => addStar(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
                             </th>
                             <td className="py-4 px-6 text-white">
                                 {crypto[key].name}
