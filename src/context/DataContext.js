@@ -9,7 +9,6 @@ const Provider = ({ children }) => {
 
   const inputRef = useRef(null);
   const [crypto, setCrypto] = React.useState({});
-  const [stars, setStars] = React.useState({});
 
     const getCrypto = async () => {
        const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250') //wait for data to reach (async and await)
@@ -23,12 +22,20 @@ const Provider = ({ children }) => {
 
     const addStar = (key) => {
       console.log(crypto[key].market_cap_rank);
-      setStars(crypto[key].market_cap_rank);
+
+      {
+        let stars = JSON.parse(localStorage.getItem("thestars") || "[]"); // get current objects
+        let star = crypto[key].market_cap_rank;
+    
+        stars.push(star); //push new one
+ 
+        localStorage.setItem("thestars" ,JSON.stringify(stars))
+      }
     }
 
 
   const DataContextValues = {
-    inputRef, crypto, getCrypto, addStar, stars
+    inputRef, crypto, getCrypto, addStar
   }
 
 return (

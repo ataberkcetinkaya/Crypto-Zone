@@ -3,11 +3,9 @@ import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { stars } = useData();
-
   return (
     <div className='text-white'>
-        {stars}
+       {localStorage.getItem("thestars")}
     </div>
   )
 }
