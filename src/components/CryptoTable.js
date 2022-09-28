@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react'
-import axios from 'axios'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +24,7 @@ const CryptoTable = () => {
 
       <div className="flex justify-center mt-10 ml-96 mr-96">
           <table className="w-full text-sm text-center">
-              <thead className="text-xs uppercase bg-gray-700 text-gray-100 ">
+              <thead className="text-xs uppercase bg-gray-700 text-gray-100" >
                   <tr>
                       <th className="py-4 px-6">
                           Rank
@@ -48,7 +47,7 @@ const CryptoTable = () => {
               <tbody>
                 {Object.keys(crypto).map((key, index) => {
                     return (
-                        <tr className="bg-gray-800 text-center ">
+                        <tr className="bg-gray-800 text-center " key={index}>
                             <th className="py-4 px-6 font-medium text-white">
                                 <span>{crypto[key].market_cap_rank}</span>
                                 <button onClick={() => addStar(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
