@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { storage } = useData();
+  const { storage, setInfo } = useData();
 
   useEffect(() => {
-    
-  }, [])
+    setInfo();
+  })
 
   return (
     <>
+    <div className='text-white text-center mt-5 text-xl justify-center mt-5'>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
+    </div>
+
       <div className='text-white text-center mt-5 text-xl justify-center mt-12'>
         <table className="w-screen text-center">
               <thead className="uppercase bg-gray-700 text-gray-100 ">
