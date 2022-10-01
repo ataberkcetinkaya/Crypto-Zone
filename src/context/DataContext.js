@@ -11,17 +11,14 @@ const Provider = ({ children }) => {
   const [crypto, setCrypto] = React.useState({});
   const [storage, setStorage] = React.useState([]);
   
-  
 
     const getCrypto = async () => {
        const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250') //wait for data to reach (async and await)
        setCrypto(data);
     }
-    //console.log(crypto);
 
     useEffect(() => {
         getCrypto();
-        
     }, []);
 
     const addStar = (key) => {
@@ -39,9 +36,18 @@ const Provider = ({ children }) => {
       setStorage(a);
     }
 
+    const onRemove = (key) => {
+      let a = localStorage.getItem('crypto');
+      let newList = JSON.parse(a);
+      let index = newList.findIndex((item) => item.id === key);
+      newList.splice(key, 1);
+      localStorage.setItem('crypto', JSON.stringify(newList));
+      setStorage(newList);
+    }
+
 
   const DataContextValues = {
-    inputRef, crypto, getCrypto, addStar, storage, setStorage, setInfo
+    inputRef, crypto, getCrypto, addStar, storage, setStorage, setInfo, onRemove
   }
 
 return (

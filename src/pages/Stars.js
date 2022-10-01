@@ -4,11 +4,13 @@ import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { storage, setInfo } = useData();
+  const { storage, setInfo, onRemove } = useData();
 
   useEffect(() => {
     setInfo();
   })
+
+  
 
   return (
     <>
@@ -22,17 +24,20 @@ const Stars = () => {
         <table className="w-screen text-center">
               <thead className="uppercase bg-gray-700 text-gray-100 ">
                 <tr>
+                    <th>
+                      Rank
+                    </th>
                     <th className="py-4 px-6">
-                        Submit ID
+                      Crypto
                     </th>
                     <th>
-                        Survey ID
+                      Price
                     </th>
                     <th className="py-4 px-4">
-                        Score
+                      Change
                     </th>
                     <th className="py-3 px-6">
-                        Feedback
+                      Volume
                     </th>
                     <th></th>
                 </tr>
@@ -40,8 +45,11 @@ const Stars = () => {
               
               <tbody>
               {storage.map((item, index) => (
-                <tr className="bg-gray-800 text-center"  key={index} >
-                    <th className="py-4 px-6 font-medium text-white">
+                <tr className="bg-gray-800 text-center" key={index} >
+                    <th className='py-4 px-6 font-medium text-white'>
+                      
+                    </th>
+                    <th className="py-4 px-6 text-white">
                       {item}
                     </th>
                     <td className="py-4 px-6 text-white">
@@ -54,7 +62,7 @@ const Stars = () => {
                       111
                     </td>
                     <td>
-                        <button className='mr-5 text-red-400'><u>Delete</u></button>
+                        <button onClick={() => onRemove(index)} className='mr-5 text-red-400'><u>Delete</u></button>
                     </td>
                 </tr>
               ))}
