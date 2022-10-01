@@ -21,11 +21,12 @@ const Provider = ({ children }) => {
         getCrypto();
     }, []);
 
+
     const addStar = (key) => {
       let a = JSON.parse(localStorage.getItem('crypto')) || [];
 
       if(a.indexOf(crypto[key].name) === -1) {
-        a.push(crypto[key].name);
+        a.push([crypto[key].name, crypto[key].market_cap_rank, crypto[key].current_price, crypto[key].price_change_24h, crypto[key].total_volume]);
         localStorage.setItem('crypto', JSON.stringify(a));
       }
         setStorage(a);

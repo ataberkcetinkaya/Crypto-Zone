@@ -10,7 +10,6 @@ const Stars = () => {
     setInfo();
   })
 
-  
 
   return (
     <>
@@ -47,19 +46,19 @@ const Stars = () => {
               {storage.map((item, index) => (
                 <tr className="bg-gray-800 text-center" key={index} >
                     <th className='py-4 px-6 font-medium text-white'>
-                      
+                      {item[1]}
                     </th>
                     <th className="py-4 px-6 text-white">
-                      {item}
+                      {item[0]}
                     </th>
                     <td className="py-4 px-6 text-white">
-                      123
+                      {item[2]}
                     </td>
                     <td className="py-4 px-6 text-white">
-                      111
+                      {item[3]}
                     </td>
                     <td className="py-4 px-6 text-white">
-                      111
+                      {item[4]}
                     </td>
                     <td>
                         <button onClick={() => onRemove(index)} className='mr-5 text-red-400'><u>Delete</u></button>
