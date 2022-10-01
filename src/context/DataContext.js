@@ -21,6 +21,7 @@ const Provider = ({ children }) => {
 
     useEffect(() => {
         getCrypto();
+        
     }, []);
 
     const addStar = (key) => {
@@ -30,12 +31,17 @@ const Provider = ({ children }) => {
         a.push(crypto[key].name);
         localStorage.setItem('crypto', JSON.stringify(a));
       }
-      setStorage(a);
+        setStorage(a);
       }
+
+    const setInfo = () => {
+      let a = JSON.parse(localStorage.getItem('crypto')) || [];
+      setStorage(a);
+    }
 
 
   const DataContextValues = {
-    inputRef, crypto, getCrypto, addStar, storage
+    inputRef, crypto, getCrypto, addStar, storage, setStorage, setInfo
   }
 
 return (

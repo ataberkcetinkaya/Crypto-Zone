@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useData } from '../context/DataContext';
 
 const Stars = () => {
@@ -7,7 +6,7 @@ const Stars = () => {
   const { storage } = useData();
 
   useEffect(() => {
-    console.log(storage);
+    
   }, [])
 
   return (
