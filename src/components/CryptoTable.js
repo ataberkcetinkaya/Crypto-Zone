@@ -47,13 +47,14 @@ const CryptoTable = () => {
               <tbody>
                 {Object.keys(crypto).map((key, index) => {
                     return (
-                        <tr className="bg-gray-800 text-center " key={index}>
+                        <tr className="bg-gray-800 text-center border-b border-stone-500" key={index}>
                             <th className="py-4 px-6 font-medium text-white">
                                 <span>{crypto[key].market_cap_rank}</span>
                                 <button onClick={() => addStar(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
                             </th>
-                            <td className="py-4 px-6 text-white">
-                                {crypto[key].name}
+                            <td className="py-4 px-6 text-white flex items-center place-content-center">
+                                <img width={40} height={40} src={crypto[key].image} className="mr-5"></img>
+                                <span>{crypto[key].name}</span>
                             </td>
                             <td className="py-4 px-6 text-white">
                                 {crypto[key].current_price}

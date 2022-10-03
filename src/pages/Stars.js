@@ -8,7 +8,7 @@ const Stars = () => {
 
   useEffect(() => {
     setInfo();
-  })
+  }, []);
 
 
   return (
@@ -19,48 +19,27 @@ const Stars = () => {
       </Link>
     </div>
 
-      <div className='text-white text-center mt-5 text-xl justify-center mt-12'>
-        <table className="w-screen text-center">
+      <div className='flex justify-center mt-10 ml-96 mr-96'>
+        <table className="w-full text-center">
               <thead className="uppercase bg-gray-700 text-gray-100 ">
                 <tr>
-                    <th>
-                      Rank
-                    </th>
                     <th className="py-4 px-6">
                       Crypto
                     </th>
-                    <th>
-                      Price
-                    </th>
-                    <th className="py-4 px-4">
-                      Change
-                    </th>
-                    <th className="py-3 px-6">
-                      Volume
-                    </th>
+                   
                     <th></th>
                 </tr>
               </thead>
               
               <tbody>
               {storage.map((item, index) => (
-                <tr className="bg-gray-800 text-center" key={index} >
-                    <th className='py-4 px-6 font-medium text-white'>
-                      {item[1]}
+                <tr className="bg-gray-800 text-center border-b border-stone-500" key={index} >
+                    <th className="py-4 px-6 text-white flex items-center place-content-center">
+                    <img width={40} height={40} className="mr-5" src={item[1]}></img>
+                      <span>{item[0]}</span>
                     </th>
-                    <th className="py-4 px-6 text-white">
-                      {item[0]}
-                    </th>
+                   
                     <td className="py-4 px-6 text-white">
-                      {item[2]}
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                      {item[3]}
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                      {item[4]}
-                    </td>
-                    <td>
                         <button onClick={() => onRemove(index)} className='mr-5 text-red-400'><u>Delete</u></button>
                     </td>
                 </tr>
