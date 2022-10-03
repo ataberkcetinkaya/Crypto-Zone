@@ -4,12 +4,14 @@ import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { storage, setInfo, onRemove } = useData();
+  const { storage, setInfo, onRemove, image } = useData();
 
   useEffect(() => {
     setInfo();
   }, []);
 
+  // <button className='text-green-400'><u>Details</u></button>
+  // <button onClick={() => onRemove(index)} className='text-red-400 ml-12'><u>Delete</u></button>
 
   return (
     <>
@@ -19,31 +21,35 @@ const Stars = () => {
       </Link>
     </div>
 
-      <div className='flex justify-center mt-10 ml-96 mr-96'>
-        <table className="w-full text-center">
+      <div className='flex justify-center mt-10'>
+        <table className="w-3/5 md:w-2/5 text-center">
               <thead className="uppercase bg-gray-700 text-gray-100 ">
                 <tr>
                     <th className="py-4 px-6">
                       Crypto
                     </th>
-                   
-                    <th></th>
+                    
                 </tr>
               </thead>
               
-              <tbody>
-              {storage.map((item, index) => (
-                <tr className="bg-gray-800 text-center border-b border-stone-500" key={index} >
-                    <th className="py-4 px-6 text-white flex items-center place-content-center">
-                    <img width={40} height={40} className="mr-5" src={item[1]}></img>
-                      <span>{item[0]}</span>
+              <tbody className='flex'>
+                     
+                <tr className="bg-gray-800 text-center flex-auto">
+                  {image.map((img, indx) => (
+                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500">
+                        <img width={25} src={img}></img>
                     </th>
-                   
-                    <td className="py-4 px-6 text-white">
-                        <button onClick={() => onRemove(index)} className='mr-5 text-red-400'><u>Delete</u></button>
-                    </td>
+                    ))}
                 </tr>
-              ))}
+
+                <tr className="bg-gray-800 text-center flex-auto">
+                  {storage.map((item, index) => (
+                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500">
+                      {item}
+                    </th>
+                  ))}
+                </tr>
+
               </tbody>
             </table>
       </div>

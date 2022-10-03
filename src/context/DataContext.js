@@ -10,6 +10,7 @@ const Provider = ({ children }) => {
   const inputRef = useRef(null);
   const [crypto, setCrypto] = React.useState({});
   const [storage, setStorage] = React.useState([]);
+  const [image, setImage] = React.useState([]);
 
     const getCrypto = async () => {
        const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250') //wait for data to reach (async and await)
@@ -25,15 +26,27 @@ const Provider = ({ children }) => {
       let a = JSON.parse(localStorage.getItem('crypto')) || [];
 
       if(a.indexOf(crypto[key].name) === -1) {
-        a.push([crypto[key].name, crypto[key].image]);
+        a.push(crypto[key].name);
         localStorage.setItem('crypto', JSON.stringify(a));
       }
-        setStorage(a);
+
+      let b = JSON.parse(localStorage.getItem('image')) || [];
+
+      if(b.indexOf(crypto[key].image) === -1) {
+        b.push(crypto[key].image);
+        localStorage.setItem('image', JSON.stringify(b));
+      }
+      setImage(b);
+ 
+      setStorage(a);
       }
 
     const setInfo = () => {
       let a = JSON.parse(localStorage.getItem('crypto')) || [];
       setStorage(a);
+
+      let b = JSON.parse(localStorage.getItem('image')) || [];
+      setImage(b);
     }
 
     const onRemove = (key) => {
@@ -46,7 +59,7 @@ const Provider = ({ children }) => {
 
 
   const DataContextValues = {
-    inputRef, crypto, getCrypto, addStar, storage, setStorage, setInfo, onRemove
+    inputRef, crypto, getCrypto, addStar, storage, setStorage, setInfo, onRemove, image
   }
 
 return (
