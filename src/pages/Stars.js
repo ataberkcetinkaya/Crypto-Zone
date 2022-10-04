@@ -27,13 +27,12 @@ const Stars = () => {
                     <th className="py-4 px-6">
                       Crypto
                     </th>
-                    
                 </tr>
               </thead>
               
               <tbody className='flex'>
                      
-                <tr className="bg-gray-800 text-center flex-auto">
+                <tr className="bg-gray-800 text-center w-32 md:w-full">
                   {image.map((img, indx) => (
                     <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={indx}>
                         <img width={25} src={img} alt="cryptoLogo"></img>
@@ -41,13 +40,13 @@ const Stars = () => {
                     ))}
                 </tr>
 
-                <tr className="bg-gray-800 text-center flex-auto">
+                <tr className="bg-gray-800 text-center w-38 md:w-full">
                   {storage.map((item, index) => (
                     <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={index}>
-                      {item}
-                      <button onClick={() => onRemove(index)} className='text-red-400 ml-20'><u>Delete</u></button>         
+                      <span className='w-36'>{item}</span>
+                      <button onClick={() => onRemove(index)} className='text-red-400 w-24'><u>Delete</u></button>
                     </th>
-                  ))}
+                    ))}
                 </tr>
 
               </tbody>
