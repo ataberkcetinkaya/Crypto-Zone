@@ -51,10 +51,15 @@ const Provider = ({ children }) => {
 
     const onRemove = (key) => {
       let a = localStorage.getItem('crypto');
+      let b = localStorage.getItem('image');
       let newList = JSON.parse(a);
+      let newList2 = JSON.parse(b);
       newList.splice(key, 1);
+      newList2.splice(key, 1);
       localStorage.setItem('crypto', JSON.stringify(newList));
+      localStorage.setItem('image', JSON.stringify(newList2));
       setStorage(newList);
+      setImage(newList2);
     }
 
 

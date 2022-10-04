@@ -11,7 +11,6 @@ const Stars = () => {
   }, []);
 
   // <button className='text-green-400'><u>Details</u></button>
-  // <button onClick={() => onRemove(index)} className='text-red-400 ml-12'><u>Delete</u></button>
 
   return (
     <>
@@ -36,16 +35,17 @@ const Stars = () => {
                      
                 <tr className="bg-gray-800 text-center flex-auto">
                   {image.map((img, indx) => (
-                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500">
-                        <img width={25} src={img}></img>
+                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={indx}>
+                        <img width={25} src={img} alt="cryptoLogo"></img>
                     </th>
                     ))}
                 </tr>
 
                 <tr className="bg-gray-800 text-center flex-auto">
                   {storage.map((item, index) => (
-                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500">
+                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={index}>
                       {item}
+                      <button onClick={() => onRemove(index)} className='text-red-400 ml-20'><u>Delete</u></button>         
                     </th>
                   ))}
                 </tr>
