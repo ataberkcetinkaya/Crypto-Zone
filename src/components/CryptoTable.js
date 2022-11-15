@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -6,17 +6,14 @@ import { useData } from '../context/DataContext';
  
 const CryptoTable = () => {
 
-    const { inputRef, crypto, addStar, setInfo } = useData();
+    const { crypto, addStar, setInfo, handleType, inputText, filteredResults, addStarFiltered } = useData();
 
-    // const handleType = () => {
-    //     console.log(inputRef.current.value);
-    // } onClick={handleType} > to input button
-    
-  return (
+    const inputRef = useRef(null);
+
+    return (
     <>
       <div className="flex justify-center mt-5 h-10">
-        <input ref={inputRef} type="text" className='bg-black text-white w-64 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
-        <button className='ml-5 w-24 border-solid bg-black text-white border-2 border-slate-400'>Search</button>
+        <input onChange={(e) => handleType(e.target.value)} ref={inputRef} type="text" className='bg-black text-white w-64 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
         <Link to="/stars">
             <FontAwesomeIcon onClick={setInfo} icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
         </Link>
@@ -45,29 +42,54 @@ const CryptoTable = () => {
               </thead>
               
               <tbody>
-                {Object.keys(crypto).map((key, index) => {
+                {inputText.length > 1 ? ( Object.keys(filteredResults).map((key, index) => {
                     return (
                         <tr className="bg-gray-800 text-center border-b border-stone-500" key={index}>
                             <th className="py-4 px-6 font-medium text-white">
-                                <span>{crypto[key].market_cap_rank}</span>
-                                <button onClick={() => addStar(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
+                                <span>{filteredResults[key].market_cap_rank}</span>
+                                <button onClick={() => addStarFiltered(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
                             </th>
                             <td className="py-4 px-6 text-white flex items-center place-content-center">
-                                <img width={40} height={40} src={crypto[key].image} className="mr-5"></img>
-                                <span>{crypto[key].name}</span>
+                                <img width={40} height={40} src={filteredResults[key].image} className="mr-5"></img>
+                                <span>{filteredResults[key].name}</span>
                             </td>
                             <td className="py-4 px-6 text-white">
-                                {crypto[key].current_price}
+                                {filteredResults[key].current_price}
                             </td>
                             <td className="py-4 px-6 text-white">
-                                {crypto[key].price_change_24h}
+                                {filteredResults[key].price_change_24h}
                             </td>
                             <td className="py-4 px-6 text-white">
-                                {crypto[key].total_volume}
+                                {filteredResults[key].total_volume}
                             </td>
                         </tr>
                          )
-                        })}
+                        })
+                    ) : (
+                        Object.keys(crypto).map((key, index) => {
+                            return (
+                                <tr className="bg-gray-800 text-center border-b border-stone-500" key={index}>
+                                    <th className="py-4 px-6 font-medium text-white">
+                                        <span>{crypto[key].market_cap_rank}</span>
+                                        <button onClick={() => addStar(key)} className='ml-4 border border-yellow-400 bg-yellow-400 text-black w-12'>Add</button>
+                                    </th>
+                                    <td className="py-4 px-6 text-white flex items-center place-content-center">
+                                        <img width={40} height={40} src={crypto[key].image} className="mr-5"></img>
+                                        <span>{crypto[key].name}</span>
+                                    </td>
+                                    <td className="py-4 px-6 text-white">
+                                        {crypto[key].current_price}
+                                    </td>
+                                    <td className="py-4 px-6 text-white">
+                                        {crypto[key].price_change_24h}
+                                    </td>
+                                    <td className="py-4 px-6 text-white">
+                                        {crypto[key].total_volume}
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    )}
               </tbody>
           </table>
         </div>
