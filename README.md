@@ -1,4 +1,4 @@
-# Crypto Zone
+# <img src="https://i.ibb.co/Y7ZhFNz/android-chrome-48x48.png" width="40" title="logo"> Crypto Zone
 
 <h3>
 
