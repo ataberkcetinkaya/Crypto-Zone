@@ -4,13 +4,11 @@ import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { storage, setInfo, onRemove, image } = useData();
+  const { storage,onRemove, getLocalStorage } = useData();
 
   useEffect(() => {
-    setInfo();
+    getLocalStorage();
   }, []);
-
-  // <button className='text-green-400'><u>Details</u></button>
 
   return (
     <>
@@ -30,28 +28,34 @@ const Stars = () => {
                 </tr>
               </thead>
               
-              <tbody className='flex'>
-                     
-                <tr className="bg-gray-800 text-center w-32 md:w-full">
-                  {image.map((img, indx) => (
-                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={indx}>
-                        <img width={25} src={img} alt="cryptoLogo"></img>
-                    </th>
-                    ))}
+              <tbody>
+              {storage.map((item, index) => (
+                <tr className="bg-gray-800 text-center border-b border-stone-500" key={index}>
+                  <td className="py-4 px-6 text-white flex items-center place-content-center">
+                    <img width={40} height={40} src={item.image} alt={item.name} />
+                  </td>
+                  <td className="text-white">
+                    <span>{item.name}</span>
+                  </td>
+                  <td className="text-white">
+                    <span>{item.usd}</span>
+                  </td>
+                  {/* <td className="text-white">
+                    <span className='w-36'>{item.usd_24h_change}</span>
+                  </td>
+                  <td className="text-white">
+                    <span className='w-36'>{item.usd_24h_vol}</span>
+                  </td> */}
+                  <td className="text-white" key={index}>
+                    <button onClick={() => onRemove(index)} className='text-red-400 w-24'><u>Delete</u></button>
+                  </td>
                 </tr>
-
-                <tr className="bg-gray-800 text-center w-38 md:w-full">
-                  {storage.map((item, index) => (
-                    <th className="h-16 text-white flex items-center place-content-center border-b border-stone-500" key={index}>
-                      <span className='w-36'>{item}</span>
-                      <button onClick={() => onRemove(index)} className='text-red-400 w-24'><u>Delete</u></button>
-                    </th>
-                    ))}
-                </tr>
-
+                ))}
               </tbody>
             </table>
-      </div>
+      </div> 
+
+     
     </>
   )
 }

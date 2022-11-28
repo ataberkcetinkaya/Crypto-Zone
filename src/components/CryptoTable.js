@@ -6,7 +6,7 @@ import { useData } from '../context/DataContext';
  
 const CryptoTable = () => {
 
-    const { crypto, addStar, setInfo, handleType, inputText, filteredResults, addStarFiltered } = useData();
+    const { crypto, addStar, handleType, inputText, filteredResults, addStarFiltered } = useData();
 
     const inputRef = useRef(null);
 
@@ -16,7 +16,7 @@ const CryptoTable = () => {
         <h1 className='text-white mt-2 border border-solid hover:border-dotted p-1 self-center'>Crypto Zone</h1>
         <input onChange={(e) => handleType(e.target.value)} ref={inputRef} type="text" className='bg-black text-white sm:w-64 w-36 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
         <Link to="/stars">
-            <FontAwesomeIcon onClick={setInfo} icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
         </Link>
       </div>
 

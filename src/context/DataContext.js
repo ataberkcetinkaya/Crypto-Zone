@@ -7,21 +7,45 @@ const useData = () => useContext(DataContext);
 
 const Provider = ({ children }) => {
 
-  const [crypto, setCrypto] = React.useState({});
-  const [storage, setStorage] = React.useState([]);
-  const [image, setImage] = React.useState([]);
+  const [crypto, setCrypto] = useState({});
+  const [storage, setStorage] = useState([]);
+  const [image, setImage] = useState([]);
 
   const [inputText, setInputText] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
+
+
+  const getLocalStorage = async () => {
+    let storage = localStorage.getItem('crypto');
+    if (storage) {
+      const list = [];
+      storage = JSON.parse(storage);
+      let img = JSON.parse(localStorage.getItem('image')) || [];
+
+      
+      for(let i = 0; i < storage.length; i++) {
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${storage[i]}&vs_currencies=usd&include_24hr_vol=true&include_24hr_change=true`) //wait for data to reach (async and await)
+        const key = Object.keys(data);
+        const value = Object.values(data);
+        //console.log(key, value);
+
+        list.push({
+          image: img[i],
+          name: key[0],
+          ...value[0] //destructuring
+          });
+      }
+      //console.log(list);
+      setStorage(list);
+    }
+  }
 
   const handleType = (searchValue) => {
 
     setInputText(searchValue);
 
     if(inputText !== '') {
-        const filteredData = crypto.filter((item) => {
-            return Object.values(item).join('').toLowerCase().includes(searchValue.toLowerCase());
-        });
+        const filteredData = crypto.filter((item) =>  Object.values(item).join('').toLowerCase().includes(searchValue.toLowerCase()));
         setFilteredResults(filteredData);
     }
     else {
@@ -41,8 +65,8 @@ const Provider = ({ children }) => {
     const addStarFiltered = (key) => {
       let a = JSON.parse(localStorage.getItem('crypto')) || [];
 
-      if(a.indexOf(filteredResults[key].name) === -1) {
-        a.push(filteredResults[key].name);
+      if(a.indexOf(filteredResults[key].id) === -1) {
+        a.push(filteredResults[key].id);
         localStorage.setItem('crypto', JSON.stringify(a));
       }
      
@@ -61,8 +85,8 @@ const Provider = ({ children }) => {
     const addStar = (key) => {
       let a = JSON.parse(localStorage.getItem('crypto')) || [];
 
-      if(a.indexOf(crypto[key].name) === -1) {
-        a.push(crypto[key].name);
+      if(a.indexOf(crypto[key].id) === -1) {
+        a.push(crypto[key].id);
         localStorage.setItem('crypto', JSON.stringify(a));
       }
      
@@ -75,14 +99,6 @@ const Provider = ({ children }) => {
       setImage(b);
  
       setStorage(a);
-      }
-
-    const setInfo = () => {
-      let a = JSON.parse(localStorage.getItem('crypto')) || [];
-      setStorage(a);
-
-      let b = JSON.parse(localStorage.getItem('image')) || [];
-      setImage(b);
     }
 
     const onRemove = (key) => {
@@ -100,7 +116,7 @@ const Provider = ({ children }) => {
 
 
   const DataContextValues = {
-    crypto, getCrypto, addStar, storage, setStorage, setInfo, onRemove, image, handleType, inputText, filteredResults, addStarFiltered
+    crypto, getCrypto, addStar, storage, setStorage,  onRemove, image, handleType, inputText, filteredResults, addStarFiltered, getLocalStorage
   }
 
 return (
