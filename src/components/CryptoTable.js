@@ -68,6 +68,11 @@ const CryptoTable = () => {
                         })
                     ) : (
                         Object.keys(crypto).map((key, index) => {
+                            const priceChange24h = parseFloat(crypto[key].price_change_24h);
+                            const formattedPriceChange = priceChange24h.toFixed(2);
+
+                            const totalVolume = parseFloat(crypto[key].total_volume);
+                            const formattedTotalVolume = totalVolume.toLocaleString();
                             return (
                                 <tr className="bg-gray-800 text-center border-b border-stone-500" key={index}>
                                     <th className="py-4 px-6 font-medium text-white">
@@ -79,13 +84,13 @@ const CryptoTable = () => {
                                         <span>{crypto[key].name}</span>
                                     </td>
                                     <td className="py-4 px-6 text-white">
-                                        {crypto[key].current_price}
+                                        {crypto[key].current_price} $
                                     </td>
                                     <td className="py-4 px-6 text-white">
-                                        {crypto[key].price_change_24h}
+                                        {formattedPriceChange > 0 ? `+ ${formattedPriceChange}` : formattedPriceChange}
                                     </td>
                                     <td className="py-4 px-6 text-white">
-                                        {crypto[key].total_volume}
+                                        {formattedTotalVolume}
                                     </td>
                                 </tr>
                             )
