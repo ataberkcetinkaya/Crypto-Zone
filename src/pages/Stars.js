@@ -38,7 +38,7 @@ const Stars = () => {
                     <span>{item.name}</span>
                   </td>
                   <td className="text-white">
-                    <span>{item.usd}</span>
+                    <span>{item.usd} $</span>
                   </td>
                   {/* <td className="text-white">
                     <span className='w-36'>{item.usd_24h_change}</span>
