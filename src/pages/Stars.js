@@ -4,11 +4,11 @@ import { useData } from '../context/DataContext';
 
 const Stars = () => {
 
-  const { storage,onRemove, getLocalStorage } = useData();
+  const { storage, onRemove, getLocalStorage } = useData();
 
   useEffect(() => {
     getLocalStorage();
-  }, []);
+  }, [onRemove]);
 
   return (
     <>
