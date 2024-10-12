@@ -6,6 +6,10 @@ Body {
   background-color: rgb(34, 34, 34);
 }
 
-.iconColor {
+.starsIconColor {
   color: rgb(250 204 21);
+}
+
+.profileIconColor {
+  color: rgb(0, 129, 250);
 }

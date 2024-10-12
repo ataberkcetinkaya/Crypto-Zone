@@ -1,0 +1,30 @@
+.profilePic {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+.mainPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.backButton {
+    position: absolute; /* Position it absolutely within the parent */
+    top: 20px;
+    right: 20px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.backButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

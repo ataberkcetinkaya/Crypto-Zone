@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
+import './Stars.css';
 
 const Stars = () => {
 
@@ -14,7 +15,7 @@ const Stars = () => {
     <>
     <div className='text-white text-center mt-5 text-xl justify-center mt-5'>
       <Link to="/">
-        <button>Home</button>
+        <button className='backButton2'>Home</button>
       </Link>
     </div>
 

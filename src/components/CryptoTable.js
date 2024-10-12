@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useData } from '../context/DataContext';
  
 const CryptoTable = () => {
@@ -12,12 +12,23 @@ const CryptoTable = () => {
 
     return (
     <>
-      <div className="flex sm:justify-evenly justify-between mt-5 h-10 flex-wrap ">
+      <div className="flex sm:justify-evenly justify-between mt-5 h-10 flex-wrap">
         <h1 className='text-white mt-2 border border-solid hover:border-dotted p-1 self-center'>Crypto Zone</h1>
-        <input onChange={(e) => handleType(e.target.value)} ref={inputRef} type="text" className='bg-black text-white sm:w-64 w-36 border-solid border-2 border-slate-400' placeholder='  Type Crypto...'></input>
-        <Link to="/stars">
-            <FontAwesomeIcon icon={faStar} className="iconColor fa-xl ml-4 mt-1.5"></FontAwesomeIcon>
-        </Link>
+            <input 
+            onChange={(e) => handleType(e.target.value)} 
+            ref={inputRef} 
+            type="text" 
+            className='bg-black text-white sm:w-64 w-36 border-solid border-2 border-slate-400' 
+            placeholder='  Type Crypto...'
+            />
+        <div className="flex items-center">
+            <Link to="/stars">
+                <FontAwesomeIcon icon={faStar} className="starsIconColor fa-xl mt-1.5"></FontAwesomeIcon>
+            </Link>
+            <Link to="/profile">
+                <FontAwesomeIcon icon={faUser} className="profileIconColor fa-xl mt-1.5 ml-4"></FontAwesomeIcon>
+            </Link>
+        </div>
       </div>
 
       <div className="flex justify-center mt-10 ml-96 mr-96">
